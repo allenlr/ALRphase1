@@ -12,7 +12,8 @@ function timer(){
 function startCounter(){
     return setInterval(function(){
         let a = document.getElementById('counter'),b = parseInt(a.innerText)
-        a.innerText = b-1
+        if(b>0){a.innerText = b-1
+        }
     }, 1000)
 }
 
