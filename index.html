@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Joke Generator</title>
+    </head>
+    <style>
+        body{
+            position: relative;
+            text-align: center;
+            background-image: url('https://helios-i.mashable.com/imagery/articles/05NO8OhhfiSzs4peOC8jrkG/hero-image.fill.size_1248x702.v1644432805.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        /* .button{
+            box-sizing:content-box;
+            background: none repeat scroll 0 0 #ffffff;
+            cursor: pointer;
+            text-transform: uppercase;
+        } */
+    </style>
+    <body>
+        <h1 style="font-size: 350%">
+            Be the funniest person in the room!
+        </h1>
+        <h1 id="counter">
+            60
+        </h1>
+        <button class="button" id="heart" > ❤️ </button>
+        <button class="button" id="hold" > hold </button>
+        </br>
+        <button class="button" id="next" > next </button>
+        <button class="button" id="previous" > previous </button>
+
+        <ul class="likes"></ul>
+        <div>
+            <h3>Comments</h3>
+            <div id='list' class='comments'></div>
+
+            <h3>Leave a comment</h3>
+
+            <form id="comment-form" action="">
+                <input type="text" name=""comment" id="comment-input" cols="30" rows="10">
+            </br>
+                <button id="submit">comment</button>
+
+            </form>
+        </div>
+
+        <script src="code.js"></script>
+    </body>
+</html>
