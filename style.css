@@ -1,4 +1,6 @@
 #iframelabel {
-    color:rgb(57, 155, 247);
+    background-image: linear-gradient(to right, rgb(101, 181, 255), rgb(255, 34, 181));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-size:100px;
 }
