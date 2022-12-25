@@ -20,3 +20,20 @@ function startCounter(){
 pauseButton.addEventListener('click',function(){
     playing?(playing=false,clearInterval(interval),this.innerText="resume"):(playing=true,interval=timer(),this.innerText='hold')
 })
+
+
+
+function renderJoke(jokeData){
+    let card = document.createElement('h1');
+    card.className = 'card'
+    let jokes = document.querySelector('#jokes')
+    card.innerText = `${jokeData.joke}`
+    jokes.appendChild(card)
+}
+
+function getJokeFromAPI(){
+    fetch('https://v2.jokeapi.dev/joke/any')
+    .then(res => res.json())
+    .then(jokeData => renderJoke(jokeData))
+}
+getJokeFromAPI()
