@@ -24,8 +24,10 @@ pauseButton.addEventListener('click',function(){
 
 
 function renderJoke(jokeData){
-    let card = document.createElement('h1');
+    let card = document.createElement('h2');
     // card.style.textAlign = 'center'
+    card.setAttribute('style', 'white-space: pre;');
+    card.style.font = 'Serif'
     card.style.display = 'block'
     card.style.margin = 'auto'
     card.style.width = '50%'
@@ -33,8 +35,16 @@ function renderJoke(jokeData){
     card.style.borderStyle = 'outset'
     card.className = 'card'
     let jokes = document.querySelector('#jokes')
-    card.textContent = `${jokeData.joke}`
-    jokes.appendChild(card)
+    if(jokeData.hasOwnProperty('joke')){
+        card.textContent = `${jokeData.joke}`
+        jokes.appendChild(card)
+    }
+    else {
+        card.textContent = `${jokeData.setup}\r\n`
+        card.textContent += `\r\n`
+        card.textContent += `${jokeData.delivery}`;
+        jokes.appendChild(card);
+    }
 }
 
 function getJokeFromAPI(){
