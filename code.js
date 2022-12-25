@@ -25,9 +25,15 @@ pauseButton.addEventListener('click',function(){
 
 function renderJoke(jokeData){
     let card = document.createElement('h1');
+    // card.style.textAlign = 'center'
+    card.style.display = 'block'
+    card.style.margin = 'auto'
+    card.style.width = '50%'
+    card.style.alignSelf = 'center'
+    card.style.borderStyle = 'outset'
     card.className = 'card'
     let jokes = document.querySelector('#jokes')
-    card.innerText = `${jokeData.joke}`
+    card.textContent = `${jokeData.joke}`
     jokes.appendChild(card)
 }
 
