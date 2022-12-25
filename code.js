@@ -17,8 +17,15 @@ function startCounter(){
     }, 1000)
 }
 
-pauseButton.addEventListener('click',function(){
+pauseButton.addEventListener('click', function(){
     playing?(playing=false,clearInterval(interval),this.innerText="resume"):(playing=true,interval=timer(),this.innerText='hold')
+})
+next.addEventListener('click', function(){
+    deleteCurrentJoke();
+    getJokeFromAPI();
+})
+previous.addEventListener('click', function(){
+    getOldJoke();
 })
 
 
@@ -46,7 +53,21 @@ function renderJoke(jokeData){
         jokes.appendChild(card);
     }
 }
-
+function deleteCurrentJoke(){
+    let card = document.querySelector('.card');
+    let oldJoke = document.createElement('h2');
+    oldJoke.id = 'oldJoke';
+    oldJoke.textContent = card.textContent;
+    card.remove();
+    console.log(oldJoke)
+}
+function getOldJoke(){
+    let card = document.querySelector('.card');
+    console.log(card)
+    let oldJoke = document.getElementById('oldJoke')
+    oldJoke.textContent = card.textContent
+    card.appendChild(oldJoke)
+}
 function getJokeFromAPI(){
     fetch('https://v2.jokeapi.dev/joke/any')
     .then(res => res.json())
