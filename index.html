@@ -8,7 +8,7 @@
             position: relative;
             text-align: center;
             background-image: url('https://media.istockphoto.com/id/856170516/photo/lol-emoji-isolated-on-white-background-laughing-face-emoticon-3d-rendering.jpg?s=612x612&w=0&k=20&c=oCmxGl_2tTBJo3FBgrAjDa3Z8UicmFBRSfaAKLeWkOA=');
-            background-position: right;
+            background-position: bottom left;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: 1000px;
@@ -25,15 +25,41 @@
         }
     </style>
     <body>
-        <h1 style="font-size: 350%">
-            Be the funniest person in the room!
+        <h1 style="font-family:'Courier New', Courier, monospace">
+            Be the <strong>funniest</strong> person in the <strong>ROOM</strong>!
         </h1>
-        <h3>Next Joke in: </h3>
-        <h1 id="counter">
+        <h1 style="font-family:'Courier New', Courier, monospace"> With Joke Generator!</h1>
+        <h3 style="font-family:'Courier New', Courier, monospace">Next Joke in: </h3>
+        <h1 id="counter" style="font-family: 'Courier New', Courier, monospace;">
             60
         </h1>
-        <h2>seconds</h2>
-        <div id="jokes">
+        <h3 style="font-family: 'Courier New', Courier, monospace;">seconds</h3>
+        <div id="filterBox">
+            <h2>Joke Filter</h2>
+            <div id="flags">
+                <input id='nsfw' type="checkbox" name="nsfw" value="nsfw" /> NSFW <br />
+                <input id='religious' type="checkbox" name="religious" value="religious" /> Religious <br />
+                <input id='political' type="checkbox" name="political" value="political" /> Political <br />
+                <input id='racist' type="checkbox" name="racist" value="racist" /> Racist <br />
+                <input id='sexist' type="checkbox" name="sexist" value="sexist" /> Sexist </br>
+                <input id='explicit' type="checkbox" name="explicit" value="explicit" /> Explicit </br>
+            </div>
+        </br>
+        </div>
+        <div id="categories">
+            <h2>Joke Categories</h2>
+            <select name="category">
+                <option id='any' value="any">Any</option>
+                <option id='programming' value="programming">Programming</option>
+                <option id='misc' value="misc">Misc</option>
+                <option id=dark' value="dark">Dark</option>
+                <option id=pun' value="pun">Pun</option>
+                <option id=spooky' value="spooky">Spooky</option>
+                <option id=christmas' value="christmas">Christmas</option>
+            </select>
+        </div>
+    </br>
+        <div id="jokeBox">
 
         </div>
         <button class="button" id="heart" > ❤️ </button>

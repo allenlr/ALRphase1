@@ -4,16 +4,15 @@ let pauseButton = document.getElementById('hold')
 let interval = timer()
 
 let card = document.createElement('h2');
-// card.style.textAlign = 'center'
     card.className = 'card'
-    card.setAttribute('style', 'white-space: pre;');
-    card.style.font = 'Serif'
+    card.setAttribute=('style', 'white-space: pre;');
+    card.style.fontFamily = 'Courier New, Courier, monospace'
     card.style.display = 'block'
     card.style.margin = 'auto'
     card.style.width = '50%'
     card.style.alignSelf = 'center'
     card.style.borderStyle = 'outset'
-let jokes = document.querySelector('#jokes')
+let jokeBox = document.querySelector('#jokeBox')
 // let oldJoke = document.createElement('h2');
 //     oldJoke.id = 'oldJoke';
 //     oldJoke.setAttribute('style', 'white-space: pre;');
@@ -22,6 +21,8 @@ let jokes = document.querySelector('#jokes')
 //     oldJoke.style.width = '50%'
 let oldJoke = ""
 let oldJokeArray = [];
+let oldJokeIndex = 0;
+
 
 
 
@@ -51,43 +52,121 @@ pauseButton.addEventListener('click', function(){
     playing?(playing=false,clearInterval(interval),this.innerText="resume"):(playing=true,interval=timer(),this.innerText='hold')
 })
 function nextJoke(){
-    saveOldJokes()
-    oldJokeArray.push(oldJoke);
-    card.remove();
-    getJokeFromAPI();
-    resetTimer();
+    let currentJoke = card.textContent
+    if(oldJokeArray.includes(currentJoke) && oldJokeIndex != 0){
+         card.textContent = oldJokeArray[oldJokeArray.length - oldJokeIndex]
+         if(oldJokeIndex > 0)
+         oldJokeIndex--
+    }
+    else{
+        saveOldJokes()
+        oldJokeArray.push(oldJoke);
+        card.remove();
+        getJokeFromAPI();
+        resetTimer();
+    }
+}
+function previousJoke(){
+    card.textContent = oldJokeArray[oldJokeArray.length - (1+oldJokeIndex)]
+    if (oldJokeIndex < oldJokeArray.length-1)
+    oldJokeIndex++;
 }
 next.addEventListener('click', function(){
-    nextJoke();
+    // nextJoke();
 })
 previous.addEventListener('click', function(){
-    card.textContent = oldJoke
+    previousJoke();
 })
 
-
-function renderJoke(jokeData){
-    if(jokeData.hasOwnProperty('joke')){
-        card.textContent = `${jokeData.joke}`
-        jokes.appendChild(card)
+// function renderJoke(jokes){
+//     if(jokes[0].type === "single"){
+//         card.textContent = `${jokes[0].joke}`
+//         jokeBox.appendChild(card)
+//     }
+//     else{
+//         card.textContent = `${jokes[0].setup}\r\n`
+//         card.textContent += `\r\n`
+//         card.textContent += `${jokes[0].delivery}`;
+//         jokeBox.appendChild(card);
+//     }
+// }
+function renderJoke(jokes){
+    if(jokes[0].hasOwnProperty('joke')){
+        card.textContent = `${jokes[0].joke}`
+        jokeBox.appendChild(card)
     }
     else {
-        card.textContent = `${jokeData.setup}\r\n`
-        card.textContent += `\r\n`
-        card.textContent += `${jokeData.delivery}`;
-        jokes.appendChild(card);
+        card.textContent = `${jokes[0].setup}\r\n`;
+        card.textContent += `\r\n`;
+        card.textContent += `${jokes[0].delivery}`;
+        jokeBox.appendChild(card);
     }
 }
 
-function saveOldJokes(){
-    oldJoke = card.textContent;
-    console.log(oldJoke);
+function createHtmlFlags(){
+    let HTMLflags = document.getElementById('flags')
+    let checkedFlags = [];
+    for(let i = 0; i < HTMLflags.children.length; i++){
+        if((HTMLflags.children[i].tagName.toLowerCase() ==='input') && (HTMLflags.children[i].checked)){
+            checkedFlags.push(HTMLflags.children[i].value);
+            return checkedFlags;
 }
 
-function getJokeFromAPI(){
-    fetch('https://v2.jokeapi.dev/joke/any')
-    .then(res => res.json())
-    .then(jokeData => renderJoke(jokeData))
+function getJsonJokeFlags(jokeData){
+    let jokeFlags = [];
+    for(let i = 0; i < jokeData.jokes.flags.length; i++){
+        jokeFlags.push()
+    }
+    return jokeFlags;
 }
-nextJoke()
-getJokeFromAPI()
-console.log(oldJoke)
+function filterJokes(jokeData){
+
+    
+            let filteredJokes = jokeData.jokes.filter(joke => joke.flags[checkedFlags] === false)
+            // for(let j = 0; j< jokeData.jokes.length; j++){
+            //     if(jokeData.jokes[j].flags[checkedFlags]===false){
+            //         console.log(jokeData.jokes[j])
+            console.log(filteredJokes) 
+            renderJoke(filteredJokes)
+                }
+            }
+        }
+//     }
+// }
+// function saveOldJokes(){
+//     oldJoke = card.textContent;
+//     // console.log(oldJoke);
+// }
+
+var jsonJokes = [];
+function getJokeFromAPI(){
+    fetch('https://v2.jokeapi.dev/joke/Any?amount=10')
+    .then(res => res.json())
+    // .then(jokeData =>setJsonJokes(jokeData));
+    .then(jokeData =>console.log(jokeData));
+    // for(let i = 0; i < jsonRecords.length; i++){
+    //     jsonJokes.push(jsonRecords[i].joke);
+    //     console.log(jsonRecords[i].joke)
+    // }
+}
+
+function setJsonJokes(jokeData) {
+    for (let a = 0; a < jokeData.length; a++)   {
+        if(jokeData.jokes[a].type = 'single')    {
+            jsonJokes.push(jokeData.jokes[a]);
+            console.log(jokeData.jokes[a])
+        } else {
+            jsonJokes.push(jokeData.jokes[a].setup + ' ' + jokeData.jokes[a].delivery)
+            console.log(jsonJokes)
+        }
+    }   
+}
+
+// nextJoke()
+getJokeFromAPI();
+// for(let j = 0; j < jsonJokes.length; j++)   {
+//     setTimeout(console.log(jsonJokes[j]), 5000)
+// }
+// filterJokes()
+// createHtmlFlags()
+// getJsonJokeFlags();

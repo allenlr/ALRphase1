@@ -4,3 +4,10 @@
     -webkit-text-fill-color: transparent;
     font-size:100px;
 }
+#filterBox{
+    margin: auto;
+    display: block;
+    align-self:center;
+    border-style: groove;
+    width: 10%;
+}
