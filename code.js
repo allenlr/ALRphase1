@@ -4,6 +4,7 @@ let pauseButton = document.getElementById('hold')
 let interval = timer()
 
 let card = document.createElement('h2');
+    card.setAttribute('style', 'white-space: pre;'); //don't delete! allows backticks to read white space 
     card.className = 'card'
     card.setAttribute=('style', 'white-space: pre;');
     card.style.fontFamily = 'Courier New, Courier, monospace'
@@ -80,21 +81,19 @@ for(let i = 0; i < checkboxElems.length; i++){
 
 function renderJoke(jokes){
     let randomIndex = jokes.indexOf(jokes[Math.floor(Math.random() * jokes.length)])
-    console.log(randomIndex)
     if(jokes[randomIndex].type === "single"){
         card.textContent = `${jokes[randomIndex].joke}`
         jokeBox.appendChild(card)
     }
     else{
-        card.textContent = `${jokes[randomIndex].setup}\r\n`
-        card.textContent += `\r\n`
-        card.textContent += `${jokes[randomIndex].delivery}`;
+        card.textContent = `${jokes[randomIndex].setup}
+        
+        ${jokes[randomIndex].delivery}`;
         jokeBox.appendChild(card);
     }
 }
 
 // function renderJoke(jokes){
-//     console.log(jokes[0].type)
 //     if(jokes[0].hasOwnProperty('joke')){
 //         card.textContent = `${jokes[0].joke}`
 //         jokeBox.appendChild(card)
