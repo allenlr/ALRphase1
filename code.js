@@ -22,6 +22,7 @@ let jokeBox = document.querySelector('#jokeBox')
 let oldJoke = ""
 let oldJokeArray = [];
 let oldJokeIndex = 0;
+let checkboxElems = document.querySelectorAll("input[type='checkbox']")
 
 
 
@@ -77,6 +78,9 @@ next.addEventListener('click', function(){
 previous.addEventListener('click', function(){
     previousJoke();
 })
+for(let i = 0; i < checkboxElems.length; i++){
+    checkboxElems[i].addEventListener('change', createHtmlFlags)
+}
 
 // function renderJoke(jokes){
 //     if(jokes[0].type === "single"){
@@ -109,7 +113,10 @@ function createHtmlFlags(){
     for(let i = 0; i < HTMLflags.children.length; i++){
         if((HTMLflags.children[i].tagName.toLowerCase() ==='input') && (HTMLflags.children[i].checked)){
             checkedFlags.push(HTMLflags.children[i].value);
-            return checkedFlags;
+        }
+    }
+    console.log(checkedFlags)
+    return checkedFlags;
 }
 
 function getJsonJokeFlags(jokeData){
@@ -120,17 +127,13 @@ function getJsonJokeFlags(jokeData){
     return jokeFlags;
 }
 function filterJokes(jokeData){
-
-    
-            let filteredJokes = jokeData.jokes.filter(joke => joke.flags[checkedFlags] === false)
-            // for(let j = 0; j< jokeData.jokes.length; j++){
-            //     if(jokeData.jokes[j].flags[checkedFlags]===false){
-            //         console.log(jokeData.jokes[j])
-            console.log(filteredJokes) 
-            renderJoke(filteredJokes)
-                }
-            }
-        }
+    let filteredJokes = jokeData.jokes.filter(joke => joke.flags[checkedFlags] === false)
+    // for(let j = 0; j< jokeData.jokes.length; j++){
+    //     if(jokeData.jokes[j].flags[checkedFlags]===false){
+    //         console.log(jokeData.jokes[j])
+    console.log(filteredJokes) 
+    renderJoke(filteredJokes)
+}
 //     }
 // }
 // function saveOldJokes(){
@@ -150,17 +153,17 @@ function getJokeFromAPI(){
     // }
 }
 
-function setJsonJokes(jokeData) {
-    for (let a = 0; a < jokeData.length; a++)   {
-        if(jokeData.jokes[a].type = 'single')    {
-            jsonJokes.push(jokeData.jokes[a]);
-            console.log(jokeData.jokes[a])
-        } else {
-            jsonJokes.push(jokeData.jokes[a].setup + ' ' + jokeData.jokes[a].delivery)
-            console.log(jsonJokes)
-        }
-    }   
-}
+// function setJsonJokes(jokeData) {
+//     for (let a = 0; a < jokeData.length; a++)   {
+//         if(jokeData.jokes[a].type = 'single')    {
+//             jsonJokes.push(jokeData.jokes[a]);
+//             console.log(jokeData.jokes[a])
+//         } else {
+//             jsonJokes.push(jokeData.jokes[a].setup + ' ' + jokeData.jokes[a].delivery)
+//             console.log(jsonJokes)
+//         }
+//     }   
+// }
 
 // nextJoke()
 getJokeFromAPI();
