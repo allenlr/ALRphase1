@@ -6,7 +6,6 @@ let interval = timer()
 let card = document.createElement('h2');
     card.setAttribute('style', 'white-space: pre;'); //don't delete! allows backticks to read white space 
     card.className = 'card'
-    card.setAttribute=('style', 'white-space: pre;');
     card.style.fontFamily = 'Courier New, Courier, monospace'
     card.style.display = 'block'
     card.style.margin = 'auto'
