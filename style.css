@@ -4,10 +4,15 @@
     -webkit-text-fill-color: transparent;
     font-size:100px;
 }
-#filterBox{
+#filterBox {
     margin: auto;
     display: block;
     align-self:center;
     border-style: groove;
     width: 10%;
+}
+h2.card {
+    inline-size: 150px;
+    overflow-wrap: break-word;
+    hyphens: manual;
 }

@@ -6,11 +6,13 @@ let interval = timer()
 let card = document.createElement('h2');
     card.setAttribute('style', 'white-space: pre;'); //don't delete! allows backticks to read white space 
     card.className = 'card'
+    // card.setAttribute('style', 'overflow-wrap: break-word')
+    card.setAttribute('style', 'hyphens: auto')
     card.style.fontFamily = 'Courier New, Courier, monospace'
-    card.style.display = 'block'
+    // card.style.display = 'block'
     card.style.margin = 'auto'
     card.style.width = '50%'
-    card.style.alignSelf = 'center'
+    // card.style.alignSelf = 'center'
     card.style.borderStyle = 'outset'
 let jokeBox = document.querySelector('#jokeBox')
 let oldJoke = ""
@@ -80,6 +82,7 @@ for(let i = 0; i < checkboxElems.length; i++){
 
 function renderJoke(jokes){
     let randomIndex = jokes.indexOf(jokes[Math.floor(Math.random() * jokes.length)])
+    console.log(jokes[randomIndex])
     if(jokes[randomIndex].type === "single"){
         card.textContent = `${jokes[randomIndex].joke}`
         jokeBox.appendChild(card)
@@ -87,7 +90,7 @@ function renderJoke(jokes){
     else{
         card.textContent = `${jokes[randomIndex].setup}
         
-        ${jokes[randomIndex].delivery}`;
+${jokes[randomIndex].delivery}`;
         jokeBox.appendChild(card);
     }
 }
@@ -124,32 +127,85 @@ function createHtmlFlags(){
 //     return jokeFlags;
 // }
 
+//recursively check each element of jokeData.jokes for being false at each element of flagCheck
+
+
+// function filterJokes(jokeData){
+//     function recursiveCheck(flagCheck = createHtmlFlags){
+//         for(let i = 0; i < flagCheck.length; i++){
+//             if(jokeData.jokes.joke.flags[flagCheck[i]] === false){
+//                 filteredJokes.push(jokeData.jokes.joke);
+//                 if(jokeData.jokes.joke.flags[flagCheck[i]] === true){
+//                     filteredJokes.delete[filteredJokes[]]
+//                 }
+//             }
+//         }
+//     }
+// }
 function filterJokes(jokeData){
     let flagCheck = createHtmlFlags();
-    let filteredJokes
+    let isFalse = (currentValue) => currentValue === false;
+    // let jokeFlags = []
+    // for(let i = 0; i < flagCheck.length; i++){
+    //     jokeFlags.push(jokeData.jokes.joke[flagCheck[i]])
+    // }
+    let filteredJokes = [];
+    let booleanJokes = []
     if(flagCheck.length >= 1){
-        for(let i = 0; i < flagCheck.length; i++){
-            filteredJokes = jokeData.jokes.filter((joke) => joke.flags[flagCheck[i]] === false);
-        }   
-        renderJoke(filteredJokes);
-    }
+        // console.log(jokeData.jokes[0].flags[flagCheck[0]])
+        for(let i = 0; i < jokeData.jokes.length; i++){
+            for(let j = 0; j < flagCheck.length; j++){
+                if(jokeData.jokes[i].flags[flagCheck[j]] === false){
+                    booleanJokes.push(jokeData.jokes[i].flags[flagCheck[j]])
+                    if (booleanJokes.every(isFalse)){
+                        console.log(booleanJokes);
+                        filteredJokes.push(jokeData.jokes[i])
+                    }
+                }
+                console.log(jokeData.jokes[i])        
+            }
+        }
+            renderJoke(filteredJokes)
+        }
     else {
         let filteredJokes = Object.values(jokeData.jokes);
         renderJoke(filteredJokes);
     }
-    // for(let j = 0; j< jokeData.jokes.length; j++){
-    //     if(jokeData.jokes[j].flags[checkedFlags]===false){
-    //         console.log(jokeData.jokes[j])
-
 }
+
+// function filterJokes(jokeData){
+//     let flagCheck = createHtmlFlags();
+//     console.log(flagCheck)
+//     let filteredJokes
+//     if(flagCheck.length >= 1){
+//         for(let i = 0; i < flagCheck.length; i++){
+//             filteredJokes = jokeData.jokes.filter((joke) => joke.flags[flagCheck[i]] === false && );
+//         }
+//         for(let element of filteredJokes){
+//             console.log(element)
+//                 for(el of flagCheck){
+//                     console.log(el)
+//                     console.log(element.flags[el])
+//                     if (element.flags[el] === true){
+//                         console.log(filteredJokes)
+//                         console.log(filteredJokes.element)
+//                         delete filterJokes[element]
+//                     }
+//                 }
+//         }   
+//         renderJoke(filteredJokes);
+//     }
+//     else {
+//         let filteredJokes = Object.values(jokeData.jokes);
+//         renderJoke(filteredJokes);
 //     }
 // }
+
 function saveOldJokes(){
     oldJoke = card.textContent;
     // console.log(oldJoke);
 }
 
-var jsonJokes = [];
 function getJokeFromAPI(){
     fetch('https://v2.jokeapi.dev/joke/Any?amount=10')
     .then(res => res.json())
@@ -175,9 +231,6 @@ function getJokeFromAPI(){
 
 // nextJoke()
 getJokeFromAPI();
-// for(let j = 0; j < jsonJokes.length; j++)   {
-//     setTimeout(console.log(jsonJokes[j]), 5000)
-// }
 // filterJokes()
 // createHtmlFlags()
 // getJsonJokeFlags();
