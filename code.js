@@ -145,26 +145,18 @@ function createHtmlFlags(){
 function filterJokes(jokeData){
     let flagCheck = createHtmlFlags();
     let isFalse = (currentValue) => currentValue === false;
-    // let jokeFlags = []
-    // for(let i = 0; i < flagCheck.length; i++){
-    //     jokeFlags.push(jokeData.jokes.joke[flagCheck[i]])
-    // }
     let filteredJokes = [];
     let booleanJokes = []
     if(flagCheck.length >= 1){
-        // console.log(jokeData.jokes[0].flags[flagCheck[0]])
         for(let i = 0; i < jokeData.jokes.length; i++){
             for(let j = 0; j < flagCheck.length; j++){
-                if(jokeData.jokes[i].flags[flagCheck[j]] === false){
-                    booleanJokes.push(jokeData.jokes[i].flags[flagCheck[j]])
-                    if (booleanJokes.every(isFalse)){
-                        console.log(booleanJokes);
-                        filteredJokes.push(jokeData.jokes[i])
-                    }
+                booleanJokes.push(jokeData.jokes[i].flags[flagCheck[j]])
                 }
-                console.log(jokeData.jokes[i])        
+                if (booleanJokes.every(isFalse)){
+                    filteredJokes.push(jokeData.jokes[i])  
             }
-        }
+                booleanJokes = [];
+            }
             renderJoke(filteredJokes)
         }
     else {
