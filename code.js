@@ -6,7 +6,7 @@ let interval = timer()
 let card = document.createElement('h2');
     card.setAttribute('style', 'white-space: pre;'); //don't delete! allows backticks to read white space 
     card.className = 'card'
-    // card.setAttribute('style', 'overflow-wrap: break-word')
+    card.setAttribute('style', 'overflow-wrap: break-word')
     card.setAttribute('style', 'hyphens: auto')
     card.style.fontFamily = 'Courier New, Courier, monospace'
     // card.style.display = 'block'
@@ -45,7 +45,11 @@ function startCounter(){
     }, 1000)
 }
 
-
+// sets oldJoke as current text displayed in card
+function saveOldJokes(){
+    oldJoke = card.textContent;
+}
+// checks if oldJokeArray has current joke yet. If not, pushes current joke and displays next joke.
 function nextJoke(){
     let currentJoke = card.textContent
     if(oldJokeArray.includes(currentJoke) && oldJokeIndex != 0){
@@ -61,32 +65,43 @@ function nextJoke(){
         resetTimer();
     }
 }
+
+// displays previous joke from oldJokeArray
 function previousJoke(){
     card.textContent = oldJokeArray[oldJokeArray.length - (1+oldJokeIndex)]
     if (oldJokeIndex < oldJokeArray.length-1)
     oldJokeIndex++;
 }
 
+// click event listener for hold button
 pauseButton.addEventListener('click', function(){
     playing?(playing=false,clearInterval(interval),this.innerText="resume"):(playing=true,interval=timer(),this.innerText='hold')
 })
+// mouseover event listener to change color of button when hovering over
+pauseButton.addEventListener('mouseover', (event) => {
+    event.target.style.background = 'rgb(101, 181, 255)'
+}, false)
+// mouseout event listener to change color back to normal when moving mouse off of button
+pauseButton.addEventListener('mouseout', (event) => {
+        event.target.style.background = '';
+}, false)
+    
+
+
+// event listener for next button
 next.addEventListener('click', function(){
     nextJoke();
 })
+// event listener for previous button
 previous.addEventListener('click', function(){
     previousJoke();
 })
+
+// event listener for each checkbox to check if they are checked
 for(let i = 0; i < checkboxElems.length; i++){
     checkboxElems[i].addEventListener('change', createHtmlFlags)
 }
 
-pauseButton.addEventListener('mouseover', (event) => {
-event.target.style.background = 'rgb(101, 181, 255)'
-}, false)
-
-pauseButton.addEventListener('mouseout', (event) => {
-    event.target.style.background = '';
-}, false)
 
 function renderJoke(jokes){
     let randomIndex = jokes.indexOf(jokes[Math.floor(Math.random() * jokes.length)])
@@ -142,9 +157,7 @@ function filterJokes(jokeData){
 }
 
 
-function saveOldJokes(){
-    oldJoke = card.textContent;
-}
+
 
 function getJokeFromAPI(){
     fetch('https://v2.jokeapi.dev/joke/Any?amount=10')
