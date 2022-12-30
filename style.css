@@ -15,4 +15,5 @@ h2.card {
     inline-size: 150px;
     overflow-wrap: break-word;
     hyphens: manual;
+    /* background-color: rgb(247, 57, 57); */
 }

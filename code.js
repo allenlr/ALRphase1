@@ -80,9 +80,17 @@ for(let i = 0; i < checkboxElems.length; i++){
     checkboxElems[i].addEventListener('change', createHtmlFlags)
 }
 
+pauseButton.addEventListener('mouseover', (event) => {
+event.target.style.background = 'rgb(101, 181, 255)'
+}, false)
+
+pauseButton.addEventListener('mouseout', (event) => {
+    event.target.style.background = '';
+}, false)
+
 function renderJoke(jokes){
     let randomIndex = jokes.indexOf(jokes[Math.floor(Math.random() * jokes.length)])
-    console.log(jokes[randomIndex])
+    console.log(randomIndex)
     if(jokes[randomIndex].type === "single"){
         card.textContent = `${jokes[randomIndex].joke}`
         jokeBox.appendChild(card)
@@ -95,18 +103,6 @@ ${jokes[randomIndex].delivery}`;
     }
 }
 
-// function renderJoke(jokes){
-//     if(jokes[0].hasOwnProperty('joke')){
-//         card.textContent = `${jokes[0].joke}`
-//         jokeBox.appendChild(card)
-//     }
-//     else {
-//         card.textContent = `${jokes[0].setup}\r\n`;
-//         card.textContent += `\r\n`;
-//         card.textContent += `${jokes[0].delivery}`;
-//         jokeBox.appendChild(card);
-//     }
-// }
 
 function createHtmlFlags(){
     let HTMLflags = document.getElementById('flags')
@@ -135,10 +131,12 @@ function filterJokes(jokeData){
             }
                 booleanJokes = [];
             }
+            console.log(filteredJokes)
             renderJoke(filteredJokes)
         }
     else {
         let filteredJokes = Object.values(jokeData.jokes);
+        console.log(filteredJokes)
         renderJoke(filteredJokes);
     }
 }
@@ -146,18 +144,12 @@ function filterJokes(jokeData){
 
 function saveOldJokes(){
     oldJoke = card.textContent;
-    // console.log(oldJoke);
 }
 
 function getJokeFromAPI(){
     fetch('https://v2.jokeapi.dev/joke/Any?amount=10')
     .then(res => res.json())
-    // .then(jokeData =>setJsonJokes(jokeData));
     .then(jokeData => filterJokes(jokeData));
-    // for(let i = 0; i < jsonRecords.length; i++){
-    //     jsonJokes.push(jsonRecords[i].joke);
-    //     console.log(jsonRecords[i].joke)
-    // }
 }
 
 
