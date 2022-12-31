@@ -1,4 +1,4 @@
-
+// global variables
 let counter = document.getElementById('counter')
 let pauseButton = document.getElementById('hold')
 let interval = timer()
@@ -27,12 +27,14 @@ let playing = true;
 function timer(){
     return startCounter();
 }
+
+// resets timer back to 60 seconds
 function resetTimer(){
     let a=document.getElementById('counter'), b=parseInt(a.innerText)
     b=60;
     a.innerText = b;
 }
-
+// count down till next joke; calls nextJoke when countdown reaches 0
 function startCounter(){
     return setInterval(function(){
         let a = document.getElementById('counter'),b = parseInt(a.innerText)
@@ -102,7 +104,7 @@ for(let i = 0; i < checkboxElems.length; i++){
     checkboxElems[i].addEventListener('change', createHtmlFlags)
 }
 
-
+// gets a random joke from the 10 jokes provided by API; checks if joke is single or twopart to determine card layout; appends joke to display card
 function renderJoke(jokes){
     let randomIndex = jokes.indexOf(jokes[Math.floor(Math.random() * jokes.length)])
     console.log(randomIndex)
@@ -118,7 +120,7 @@ ${jokes[randomIndex].delivery}`;
     }
 }
 
-
+// creates an array of which checkboxes are selected to ommit those kinds of jokes from the results
 function createHtmlFlags(){
     let HTMLflags = document.getElementById('flags')
     let checkedFlags = [];
@@ -130,7 +132,8 @@ function createHtmlFlags(){
     return checkedFlags;
 }
 
-
+// checks if joke ommiter has any boxes checked; if yes, filters out any jokes where flags === true for checked flags, then adds jokes to array to randomly choose from;
+// if no, adds all jokes to array to randomly choose from
 function filterJokes(jokeData){
     let flagCheck = createHtmlFlags();
     let isFalse = (currentValue) => currentValue === false;
@@ -158,7 +161,7 @@ function filterJokes(jokeData){
 
 
 
-
+// get fetch from API; calls filterJokes function on json result
 function getJokeFromAPI(){
     fetch('https://v2.jokeapi.dev/joke/Any?amount=10')
     .then(res => res.json())
