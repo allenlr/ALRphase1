@@ -1,5 +1,5 @@
 #iframelabel {
-    background-image: linear-gradient(to right, rgb(101, 181, 255), rgb(255, 34, 181));
+    background-image: linear-gradient(to right, rgb(114, 201, 252), rgb(255, 34, 181));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size:100px;
@@ -15,5 +15,6 @@ h2.card {
     inline-size: 150px;
     overflow-wrap: break-word;
     hyphens: manual;
+    /* white-space: pre; */
     /* background-color: rgb(247, 57, 57); */
 }

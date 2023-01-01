@@ -4,21 +4,21 @@ let pauseButton = document.getElementById('hold')
 let interval = timer()
 
 let card = document.createElement('h2');
-    card.setAttribute('style', 'white-space: pre;'); //don't delete! allows backticks to read white space 
-    card.className = 'card'
-    card.setAttribute('style', 'overflow-wrap: break-word')
-    card.setAttribute('style', 'hyphens: auto')
-    card.style.fontFamily = 'Courier New, Courier, monospace'
+    card.className = 'card';
+    // card.setAttribute('style', 'white-space: pre;'); //don't delete! allows backticks to read white space 
+    card.setAttribute('style', 'overflow-wrap: break-word');
+    card.setAttribute('style', 'hyphens: auto');
+    card.style.fontFamily = 'Courier New, Courier, monospace';
     // card.style.display = 'block'
-    card.style.margin = 'auto'
-    card.style.width = '50%'
+    card.style.margin = 'auto';
+    card.style.width = '50%';
     // card.style.alignSelf = 'center'
-    card.style.borderStyle = 'outset'
-let jokeBox = document.querySelector('#jokeBox')
-let oldJoke = ""
+    card.style.borderStyle = 'outset';
+let jokeBox = document.querySelector('#jokeBox');
+let oldJoke = "";
 let oldJokeArray = [];
 let oldJokeIndex = 0;
-let checkboxElems = document.querySelectorAll("input[type='checkbox']")
+let checkboxElems = document.querySelectorAll("input[type='checkbox']");
 
 
 
@@ -108,7 +108,7 @@ for(let i = 0; i < checkboxElems.length; i++){
 function renderJoke(jokes){
     let randomIndex = jokes.indexOf(jokes[Math.floor(Math.random() * jokes.length)])
     console.log(randomIndex)
-    if(jokes[randomIndex].type === "single"){
+    if(jokes[randomIndex].type === "single"){ 
         card.textContent = `${jokes[randomIndex].joke}`
         jokeBox.appendChild(card)
     }
@@ -120,7 +120,7 @@ ${jokes[randomIndex].delivery}`;
     }
 }
 
-// creates an array of which checkboxes are selected to ommit those kinds of jokes from the results
+// creates an array of which checkboxes are selected to omit those kinds of jokes from the results
 function createHtmlFlags(){
     let HTMLflags = document.getElementById('flags')
     let checkedFlags = [];
@@ -161,7 +161,7 @@ function filterJokes(jokeData){
 
 
 
-// get fetch from API; calls filterJokes function on json result
+// get fetch from API; calls filterJokes function on json result                                
 function getJokeFromAPI(){
     fetch('https://v2.jokeapi.dev/joke/Any?amount=10')
     .then(res => res.json())
