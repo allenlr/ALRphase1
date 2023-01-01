@@ -132,7 +132,7 @@ function createHtmlFlags(){
     return checkedFlags;
 }
 
-// checks if joke ommiter has any boxes checked; if yes, filters out any jokes where flags === true for checked flags, then adds jokes to array to randomly choose from;
+// checks if joke omiter has any boxes checked; if yes, filters out any jokes where flags === true for checked flags, then adds jokes to array to randomly choose from;
 // if no, adds all jokes to array to randomly choose from
 function filterJokes(jokeData){
     let flagCheck = createHtmlFlags();
