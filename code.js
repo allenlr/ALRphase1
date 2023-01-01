@@ -50,7 +50,6 @@ function startCounter(){
 function saveOldJokes(){
     oldJoke = card.textContent;
 }
-saveOldJokes();
 // checks if oldJokeArray has current joke yet. If not, pushes current joke and displays next joke.
 function nextJoke(){
     let currentJoke = card.textContent
