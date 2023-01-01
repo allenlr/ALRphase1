@@ -5,8 +5,7 @@ let interval = timer()
 
 let card = document.createElement('h2');
     card.className = 'card';
-    // card.setAttribute('style', 'white-space: pre;'); //don't delete! allows backticks to read white space 
-    card.setAttribute('style', 'overflow-wrap: break-word');
+    card.setAttribute('style', 'white-space: pre;'); //don't delete! allows backticks to read white space 
     card.setAttribute('style', 'hyphens: auto');
     card.style.fontFamily = 'Courier New, Courier, monospace';
     // card.style.display = 'block'
@@ -51,6 +50,7 @@ function startCounter(){
 function saveOldJokes(){
     oldJoke = card.textContent;
 }
+saveOldJokes();
 // checks if oldJokeArray has current joke yet. If not, pushes current joke and displays next joke.
 function nextJoke(){
     let currentJoke = card.textContent
