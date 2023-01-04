@@ -15,12 +15,11 @@ file://wsl%24/Ubuntu/home/allen/Development/code/phase-1/ALRphase1/index.html?co
 - No Special Requirements
 
 ## Installation
-- The app is completely web-based and therefore installation is necessary other than a web browser.
+- Install as you would normally install a browser. For further information, see
 
 # Configuration
+- The module has no menu or modifiable settings. There is no configuration.
 
-emoji picture url: https://mashable.com/article/tears-of-joy-twitter-top-emoji
+[comedian youtube playlist](https://www.youtube.com/playlist?list=PLoXkGkpREHNBerh-2Ql6R5GqRk-Hz20O_)
 
-comedian youtube playlist url: https://www.youtube.com/playlist?list=PLoXkGkpREHNBerh-2Ql6R5GqRk-Hz20O_
-
-second emoji picture url: https://media.istockphoto.com/id/856170516/photo/lol-emoji-isolated-on-white-background-laughing-face-emoticon-3d-rendering.jpg?s=612x612&w=0&k=20&c=oCmxGl_2tTBJo3FBgrAjDa3Z8UicmFBRSfaAKLeWkOA=
+[background emoji picture](https://media.istockphoto.com/id/856170516/photo/lol-emoji-isolated-on-white-background-laughing-face-emoticon-3d-rendering.jpg?s=612x612&w=0&k=20&c=oCmxGl_2tTBJo3FBgrAjDa3Z8UicmFBRSfaAKLeWkOA=)
