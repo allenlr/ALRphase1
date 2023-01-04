@@ -15,6 +15,7 @@ let card = document.createElement('h2');
     card.style.borderStyle = 'outset';
 let jokeBox = document.querySelector('#jokeBox');
 let oldJoke = "";
+let currentJoke = "";
 let oldJokeArray = [];
 let oldJokeIndex = 0;
 let checkboxElems = document.querySelectorAll("input[type='checkbox']");
@@ -46,22 +47,16 @@ function startCounter(){
     }, 1000)
 }
 
-// sets oldJoke as current text displayed in card
-function saveOldJokes(){
-    oldJoke = card.textContent;
-}
 // checks if oldJokeArray has current joke yet. If not, pushes current joke and displays next joke.
 function nextJoke(){
-    let currentJoke = card.textContent
-    if(oldJokeArray.includes(currentJoke) && oldJokeIndex != 0){
+    if(oldJokeArray.includes(currentJoke) && oldJokeIndex > 0){
          card.textContent = oldJokeArray[oldJokeArray.length - oldJokeIndex]
          if(oldJokeIndex > 0)
          oldJokeIndex--
     }
     else{
-        saveOldJokes()
+        let oldJoke = card.textContent;
         oldJokeArray.push(oldJoke);
-        card.remove();
         getJokeFromAPI();
         resetTimer();
     }
@@ -86,9 +81,6 @@ pauseButton.addEventListener('mouseover', (event) => {
 pauseButton.addEventListener('mouseout', (event) => {
         event.target.style.background = '';
 }, false)
-    
-
-
 // event listener for next button
 next.addEventListener('click', function(){
     nextJoke();
@@ -110,12 +102,15 @@ function renderJoke(jokes){
     if(jokes[randomIndex].type === "single"){ 
         card.textContent = `${jokes[randomIndex].joke}`
         jokeBox.appendChild(card)
+        currentJoke = card.textContent;
+        oldJokeArray.push(currentJoke);
     }
     else{
         card.textContent = `${jokes[randomIndex].setup}
-        
-${jokes[randomIndex].delivery}`;
+        ${jokes[randomIndex].delivery}`;
         jokeBox.appendChild(card);
+        currentJoke = card.textContent;
+        oldJokeArray.push(currentJoke);
     }
 }
 
