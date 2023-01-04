@@ -14,7 +14,6 @@ let card = document.createElement('h2');
     // card.style.alignSelf = 'center'
     card.style.borderStyle = 'outset';
 let jokeBox = document.querySelector('#jokeBox');
-let oldJoke = "";
 let currentJoke = "";
 let oldJokeArray = [];
 let oldJokeIndex = 0;
@@ -61,7 +60,6 @@ function nextJoke(){
         resetTimer();
     }
 }
-
 // displays previous joke from oldJokeArray
 function previousJoke(){
     card.textContent = oldJokeArray[oldJokeArray.length - (1+oldJokeIndex)]
