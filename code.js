@@ -103,7 +103,6 @@ for(let i = 0; i < checkboxElems.length; i++){
 
 function renderJoke(jokes){
     let randomIndex = jokes.indexOf(jokes[Math.floor(Math.random() * jokes.length)])
-    console.log(randomIndex)
     if(jokes[randomIndex].type === "single"){ 
         card.textContent = `${jokes[randomIndex].joke}`
         jokeBox.appendChild(card)
@@ -144,10 +143,9 @@ function filterJokes(jokeData){
             }
                 booleanJokes = [];
             }
-            console.log(filteredJokes)
             renderJoke(filteredJokes)
         }
-    else {
+    else{
         let filteredJokes = Object.values(jokeData.jokes);
         renderJoke(filteredJokes);
     }
